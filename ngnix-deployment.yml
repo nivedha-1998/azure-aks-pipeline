@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: jupyterhub
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx-app
+      app: jupyterhub
   template:
     metadata:
       labels:
-        app: nginx-app
+        app: jupyterhub
     spec:
       containers:
-      - name: nginx-container
-        image: nginx
+      - name: jupyterhub
+        image: jupyterhub/jupyterhub
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: jupyterhub
 spec:
   ports:
   - name: http
-    targetPort: 80
-    port: 80
+    targetPort: 8000
+    port: 8000
   selector:
-    app: nginx-app
+    app: jupyterhub
   type: LoadBalancer
